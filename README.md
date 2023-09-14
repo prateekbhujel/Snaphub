@@ -1,19 +1,12 @@
-# Simple PHP MVC Framework
+# SnapHub
 
 ## Overview
 
-This is a straightforward Model-View-Controller (MVC) framework for PHP, created for educational purposes to help you grasp essential concepts of object-oriented programming and MVC architecture.
+
 
 ## Features
 
-- **Login and Signup**: User authentication with login and signup functionality.
-- **Model Errors**: Handling model validation and displaying errors to users.
-- **Pagination Styles**: Stylish pagination for effective data presentation.
-- **Input Validation**: Data input is thoroughly validated for security.
-- **Unique Columns**: Supports unique database columns to prevent duplicates.
-- **Configuration**: Centralized database function configuration.
-- **Command Line Tools**: Includes a set of handy command-line tools.
-- **Migration Features**: Database migration management with 'up,' 'down,' 'create,' 'rollback,' and 'refresh' commands.
+
 
 ## Requirements
 
@@ -30,10 +23,4 @@ This is a straightforward Model-View-Controller (MVC) framework for PHP, created
 5. Access the application through your web browser.
 
 ## Usage
-
-Use this framework as a foundation to build PHP web applications using MVC architecture. Customize and extend it according to your project's requirements.
-
-## Contributors
-
-- Pratik Bhujel - Lead Developer
 
