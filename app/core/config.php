@@ -11,12 +11,12 @@ if ((empty($_SERVER['SERVER_NAME']) && php_sapi_name() == 'cli' )|| (!empty($_SE
 	define('DBPASS', '');
 	define('DBDRIVER', '');
 	
-	define('ROOT', 'http://localhost/mvc/public');
+	define('ROOT', 'http://localhost/project/snaphub/public');
 
 }else
 {
 	/** database config **/
-	define('DBNAME', 'mvc_db');
+	define('DBNAME', 'snaphub_db');
 	define('DBHOST', 'localhost');
 	define('DBUSER', 'root');
 	define('DBPASS', '');
@@ -26,8 +26,8 @@ if ((empty($_SERVER['SERVER_NAME']) && php_sapi_name() == 'cli' )|| (!empty($_SE
 
 }
 
-define('APP_NAME', "My Webiste");
-define('APP_DESC', "Best website on the planet");
+define('APP_NAME', "SanpHub");
+define('APP_DESC', "Share your world through captivating images on our photo-sharing website.");
 
 /** true means show errors **/
 define('DEBUG', true);
