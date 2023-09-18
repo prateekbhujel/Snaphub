@@ -26,7 +26,7 @@ if ((empty($_SERVER['SERVER_NAME']) && php_sapi_name() == 'cli' )|| (!empty($_SE
 
 }
 
-define('APP_NAME', "SanpHub");
+define('APP_NAME', "SnapHub");
 define('APP_DESC', "Share your world through captivating images on our photo-sharing website.");
 
 /** true means show errors **/
