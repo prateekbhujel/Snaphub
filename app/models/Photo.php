@@ -39,19 +39,10 @@ class Photo
 	 ****************************/
 	protected $validationRules = [
 
-		'email' => [
-			'email',
-			'unique',
+		'title' => [
+			'alpha_numeric_symbol',
 			'required',
-		],
-		'username' => [
-			'alpha',
-			'required',
-		],
-		'password' => [
-			'not_less_than_8_chars',
-			'required',
-		],
+		]
 	];
 
 	
