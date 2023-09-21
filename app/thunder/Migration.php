@@ -77,6 +77,12 @@ class Migration
     {
         $this->uniqueKeys[] = $key;
     }
+    
+
+    protected function addKey($key)
+    {
+        $this->keys[] = $key;
+    }
 
 
     protected function addData($key, $value)

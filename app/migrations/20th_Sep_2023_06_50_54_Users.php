@@ -5,9 +5,9 @@ namespace Thunder;
 defined('ROOTPATH') OR exit('Access Denied!');
 
 /**
- * {CLASSNAME} class
+ * Users class
  */
-class {CLASSNAME} extends Migration
+class Users extends Migration
 {
 
 
@@ -16,6 +16,10 @@ class {CLASSNAME} extends Migration
     {
         /** Creating an Table **/
         $this->addColumn('id int(11) NOT NULL AUTO_INCREMENT');
+        $this->addColumn('username varchar(30) NULL');
+        $this->addColumn('email varchar(101) NULL');
+        $this->addColumn('role varchar(21) NULL');
+        $this->addColumn('password varchar(255) NULL');
         $this->addColumn('date_created datetime NULL');
         $this->addColumn('date_updated datetime NULL');
         $this->addPrimaryKey('id');
@@ -24,12 +28,16 @@ class {CLASSNAME} extends Migration
         $this->addKey();
         */
         
-        $this->createTable('{classname}');
+        $this->createTable('users');
         
         /** Inserting an Data **/
+        $this->addData('username', 'Admin');
+        $this->addData('email', 'email@email.com');
+        $this->addData('password', password_hash('password', PASSWORD_DEFAULT));
+        $this->addData('role', 'admin');
         $this->addData('date_created', date("Y-m-d H:i:s"));
         $this->addData('date_updated', date("Y-m-d H:i:s"));
-        $this->insertData('{classname}');
+        $this->insertData('users');
        
 
     } // End Method
@@ -38,7 +46,7 @@ class {CLASSNAME} extends Migration
     /** For Droping an Table **/
     public function down()
     {
-        $this->dropTable('{classname}');
+        $this->dropTable('users');
     } // End Method
 
 }

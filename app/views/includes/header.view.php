@@ -14,7 +14,7 @@
 
     ?>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand" href="<?=ROOT?>"><?=APP_NAME?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,20 +29,25 @@
               <a class="nav-link" href="<?=ROOT?>/photos">Photos</a>
             </li>
 
+           <li class="nav-item">
+              <a class="nav-link" href="<?=ROOT?>/upload">Upload Photos</a>
+            </li>
+
             <?php if ($ses->is_logged_in()) :?>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  user 
+                  Hi, <?= $ses->user('username')?>
+                   
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="<?ROOT?>/profile">Profile</a></li>
+                  <li><a class="dropdown-item" href="<?=ROOT?>/profile">Profile</a></li>
                   
                   <?php if ($ses->user('role' == 'admin')):?>
-                    <li><a class="dropdown-item" href="<?ROOT?>/admin">Admin</a></li>
+                    <li><a class="dropdown-item" href="<?=ROOT?>/admin">Admin</a></li>
                   <?php endif ;?>
                   
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="<?ROOT?>/logout">Logout</a></li>
+                  <li><a class="dropdown-item" href="<?=ROOT?>/logout">Logout</a></li>
                 </ul>
               </li>
             <?php else:?>
@@ -52,7 +57,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=ROOT?>/singup">Singup</a>
+                    <a class="nav-link" href="<?=ROOT?>/signup">Singup</a>
                 </li>
             <?php endif;?>
 
