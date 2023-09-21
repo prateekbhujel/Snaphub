@@ -5,17 +5,16 @@ namespace Controller;
 defined('ROOTPATH') OR exit('Access Denied!');
 
 /**
- * home class
+ * Upload class
  */
-class Home
+class Upload
 {
 	use MainController;
 
 	public function index()
 	{
-		$data['title'] = 'Home';
-		
-		$this->view('home', $data);
+
+		$this->view('upload');
 	}
 
 }
