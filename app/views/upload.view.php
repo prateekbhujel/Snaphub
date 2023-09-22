@@ -5,18 +5,40 @@
 	
 	<h1>Upload Image</h1>
 
-	<form method="post">
+	<form method="post" enctype="multipart/form-data">
 
-		<input type ="email" class="my-3 form-control" value="<?=old_value('title')?>" name="title" placeHolder="example@email.com">
-		<div><small class="text-danger"><?=$user->getError('title')?></small></div>
+		<input type ="name" class="my-3 form-control" value="<?=old_value('title')?>" name="title" placeHolder="Image Title" autocomplete="off">
+		<div><small class="text-danger"><?=$photo->getError('title')?></small></div>
 
-		<input type ="password" class="my-3 form-control" value="<?=old_value('password')?>" name="password" placeHolder="Type Your Password">
-		<div><small class="text-danger"><?=$user->getError('password')?></small></div>
-		
-		<button class="my-3 btn btn-primary">Login</button>
+		<label class="d-block">
+			<div class="input-group mb-3">
+	  			<input onchange="display_image(this.files[0])" name="image" type="file" class="form-control" id="inputGroupFile02" accept="image/jpeg, image/jpg, image/webp, image/png, image/jpg">
+	  			<label class="input-group-text" for="inputGroupFile02">Select Image</label>
+			</div>
+			<div>
+				<img src="<?=get_image()?>" class="js-image-preview img-thumbnail mx-auto d-block" style="cursor: pointer;">
+			</div>
+		</label>
+			<div><small class="text-danger"><?=$photo->getError('image')?></small></div><br>		
+
+		<button class="my-3 btn btn-primary">Upload</button>
 	</form>
 
 		
 </div>
+<script type="text/javascript">
+	
+	function display_image(file)
+	{
+		let allowed = ['image/jpeg', 'image/png', 'image/webp'];
+		if (!allowed.includes(file.type))
+		{
+			alert("Error: Supported Types are : " + allowed.toString().replaceAll("image/", " "));
+			return;
+		}
+
+		var img = document.querySelector(".js-image-preview").src = URL.createObjectURL(file);
+	}
+</script>
 
 <?php $this->view('includes/footer', $data); ?>

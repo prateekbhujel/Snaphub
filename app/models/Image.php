@@ -32,7 +32,7 @@ class Image
 				case 'image/jpeg':
 					$image = imagecreatefromjpeg($filename);
 					break;
-				
+					
 				case 'image/webp':
 					$image = imagecreatefromwebp($filename);
 					break;
