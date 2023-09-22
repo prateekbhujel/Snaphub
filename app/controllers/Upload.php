@@ -5,8 +5,8 @@ namespace Controller;
 defined('ROOTPATH') OR exit('Access Denied!');
 
 use \Core\Request;
-use  \Core\Session;
-use	  \Model\Model;
+use \Core\Session;
+use \Model\Photo;
 
 
 /**
@@ -22,7 +22,7 @@ class Upload
 
 		$req 	= new Request;
 		$ses 	= new Session;
-		$photo 	= new Model;
+		$photo 	= new Photo;
 
 		if ($req->posted())
 		{
@@ -36,35 +36,46 @@ class Upload
 					$data['image'] 			= "";
 
 					$files = $req->files();
+
 					if(!empty($files['image']['name']))
 					{
-						$folder = 'uplaods/';
+						$folder = 'uploads/';
 						if(!file_exists($folder))
 						{
-							mkdir($folder, 077, true);
-							file_put_contents($folder.'index.php', '');
+
+							mkdir($folder,0777,true);
+							file_put_contents($folder.'index.php', "");
 						}
-						$allowed = ['images/jpeg', 'image/png', 'image/webp'];
+						$allowed = ['image/jpeg', 'image/png', 'image/webp'];
 						
 						if(in_array($files['image']['type'], $allowed))
 						{
 
-							$data['image'] = $folder . time() . $files['image']['tmp_name'];  
+							$data['image'] = $folder . time() . $files['image']['name'];
 							
 							move_uploaded_file($files['image']['tmp_name'], $data['image']);
 
 							$image = new \Model\Image; 
 							$image->resize($data['image'], 1000);
+							
+							$photo->insert($data);
+							redirect('photos');
+
+						}else{
+
+							$photo->errors['image'] = "Error: File Type Not Supported !"; 
 						}
 
-					$photo->insert($data);
-					redirect('photos');
+				}else {
+
+					$photo->errors['image'] = "Error: An image is required !";
 				}
 			}
 
 			$data['errors'] = $photo->errors;
 		}
 		
+			$data['photo']	= $photo;
 		$this->view('upload', $data);
 	}
 
