@@ -46,7 +46,7 @@
 <body>
     <div class="error-container">
         <h1 class="error-heading">Oops! Error 404</h1>
-        <p class="error-message">File Not Found.</p>
+        <p class="error-message">View File Not Found.</p>
         <a href="javascript:history.back()" class="home-link">Go Back</a>
     </div>
 </body>

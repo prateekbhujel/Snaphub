@@ -8,12 +8,7 @@
 		
 		<?php if (!empty($rows)) :?>
 			<?php foreach($rows as $row) :?>
-				<div class="col-sm-4 col-md-3 col-lg-2 m-2 text-center bg-light">
-					<a href="<?=ROOT?>/photo/">
-						<img src="<?=get_image($image->getThumbnail($row->image, 251, 250));?>" class="img-thumbnail" sstyle="object-fit: cover;width: 250px; height: 250px;">
-						<div class="card-header"> <?=esc($row->title); ?> </div>
-					</a>
-				</div>
+				<?php $this->view('includes/photo-card', ['row'=>$row,'image'=>$image]);?>
 			<?php endforeach;?>
 		<?php else:?>
 			<div class="p-2 text-center alert alert-danger"> Error: No Images Found !</div>
