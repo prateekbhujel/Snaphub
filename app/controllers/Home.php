@@ -16,15 +16,15 @@ class Home
 
 	public function index()
 	{
-		$data['title'] = 'Home';
+		$title = 'Home';
 		               
 		$photo         = new Photo;
                        
 		$photo->limit  = 12;
-		$data['rows']  = $photo->findAll();
-		$data['image'] = new Image;
+		$rows  = $photo->findAll();
+		$image = new Image;
 
-		$this->view('home', $data);
+		$this->view('home', compact('title','rows','image'));
 	}
 
 }

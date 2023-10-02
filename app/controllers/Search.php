@@ -9,9 +9,9 @@ use \Model\Image;
 use \Core\Pager;
 
 /**
- * Photos class
+ * Search class
  */
-class Photos
+class Search
 {
 	use MainController;
 
@@ -24,14 +24,22 @@ class Photos
 		$offset 	   = $pager->offset;
 
 		$photo->limit  = $limit; 
-		$photo->offset  = $offset; 
+		$photo->offset = $offset; 
 		
-		$data['title'] = "All Photos";
-		$data['rows']  = $photo->findAll();
+		$data['title'] = "Search Photos";
+		
+		$find          = $_GET['find'] ?? '';
+		if(!empty($find))
+		{
+			$find          = "%$find%";
+			$query		   = "SELECT * FROM photos WHERE title LIKE :find LIMIT $limit OFFSET $offset";
+			$data['rows']  = $photo->query($query,['find'=>$find]);
+
+		}
 		$data['image'] = new Image;
 		$data['pager'] = $pager;
 		
-		$this->view('photos', $data);
+		$this->view('search', $data);
 	}
 
 }

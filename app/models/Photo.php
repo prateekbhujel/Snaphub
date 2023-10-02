@@ -47,5 +47,13 @@ class Photo
 		]
 	];
 
+	protected $onUpdateValidationRules = [
+
+		'title' => [
+			'alpha_numeric_symbol',
+			'required',
+		]
+	];
+
 	
 }

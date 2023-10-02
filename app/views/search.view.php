@@ -1,7 +1,8 @@
 <?php $this->view('includes/header', $data); ?>
     
 
-	<div class="p-4"><h3>Photos</h3></div>
+	<div class="p-4"><h3><?=$title?></h3></div>
+	<div class="px-4">Searching for: <span class="text-primary"> <?=!empty($_GET['find']) ? $_GET['find'] : 'empty string'?> <span></div>
 	<div class="row p-4 justify-content-center">
 		
 		<?php if (!empty($rows)) :?>
