@@ -4,16 +4,24 @@
 	<div class="p-4 text-center"><h3>Single Photo View</h3></div>
 	<div class="row p-4 justify-content-center">
 		
-		<?php if (!empty($row)) :?>
+		<?php if(!empty($row)) :?>
 
 			<div class="col-sm-12 m-2 text-center bg-light">
 					<div class="card-header"> <h4> <?=esc($row->title); ?> </h4></div>
-					<div class="card-header"> <i> By:<?=esc($row->user_id);?> </i></div>
+					<div class="card-header mb-2"> <a href="<?=ROOT?>/profile/<?=$row->user_id?>" style="text-decoration: none;"> <i> By: <?=esc($row->username); ?> </i> </a></div>
 					<img src="<?=get_image($row->image);?>" class="img-thumbnail">
 					<br>
-				<a href="<?=ROOT?>/photo/<?=$row->id?>">
-					Delete Image
-				</a>
+
+				<?php if ($ses->is_logged_in() && $ses->user('id') == $row->user_id) :?>				
+					<a href="<?=ROOT?>/upload/edit/<?=$row->id?>">
+						Edit Image
+					</a>
+					|
+					<a href="<?=ROOT?>/upload/delete/<?=$row->id?>">
+						Delete Image
+					</a>
+				<?php endif; ?>				
+
 			</div>
 
 		<?php else:?>
