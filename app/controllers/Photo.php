@@ -15,18 +15,18 @@ class Photo
 
 	public function index($id = null)
 	{	
-
 		$photo 		     = new \Model\Photo;
 
 		$query 		     = "SELECT photos.*, users.username FROM photos JOIN users ON users.id = photos.user_id WHERE photos.id = :id limit 1";
 		$data['row']     = $photo->query($query,['id'=>$id]);
 		
-		if ($data['row'])
+		if ($data['row']) {
 			$data['row'] = $data['row'][0];
+			$data['title'] = ucfirst($data['row']->title);
+		}
 
 		$data['image']   = new Image;
 		$data['ses']   = new \Core\Session;
-		$data['title']   = 'Single Photo View';
 
 		$this->view('photo', $data);
 	}

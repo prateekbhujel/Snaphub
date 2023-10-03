@@ -6,6 +6,7 @@ defined('ROOTPATH') OR exit('Access Denied!');
 
 use \Model\Photo;
 use \Model\Image;
+use \Model\Like;
 
 /**
  * home class
@@ -22,9 +23,10 @@ class Home
                        
 		$photo->limit  = 12;
 		$rows  = $photo->findAll();
-		$image = new Image;
+		$image = new Image; 
+		$like  = new Like;
 
-		$this->view('home', compact('title','rows','image'));
+		$this->view('home', compact('title','rows','image','like'));
 	}
 
 }
