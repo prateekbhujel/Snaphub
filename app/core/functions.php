@@ -352,3 +352,9 @@ function delete_images_from_content(string $content, string $content_new = ''):v
 
 }
 
+
+function user($column = "")
+{
+	$ses = new \Core\Session;
+	return $ses->user($column);
+}
