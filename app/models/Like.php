@@ -25,7 +25,7 @@ class Like
 	];
 	
 
-	public function userLiked(int $user_id, int $post_id)
+	public function userLiked(int|string $user_id, int $post_id)
 	{
 		if($this->first(['user_id'=>$user_id, 'post_id'=>$post_id, 'disabled'=>0]))
 		{
@@ -36,7 +36,7 @@ class Like
 	}
 
 
-	public function getLikes(int $post_id)
+	public function getLikes(int|string $post_id)
 	{
 		
 		$query = "SELECT COUNT(id) AS total_likes from likes WHERE post_id = :post_id && disabled = 0";
