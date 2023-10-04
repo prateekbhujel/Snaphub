@@ -113,7 +113,7 @@ class User
 
 				switch ($row->role) {
 					case 'admin':
-						redirect('admin');
+						redirect('home');
 						break;
 
 					case 'user':
