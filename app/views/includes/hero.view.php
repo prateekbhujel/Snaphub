@@ -23,5 +23,4 @@
   </button>
 
 
-  <!-- 33 mins 1st video -->
 </div>

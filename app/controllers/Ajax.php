@@ -5,6 +5,7 @@ namespace Controller;
 defined('ROOTPATH') OR exit('Access Denied!');
 
 use \Model\Like;
+use \Model\Comment;
 use \Core\Request;
 use \Core\Session;
 
@@ -17,9 +18,10 @@ class Ajax
 
 	public function index()
 	{
-		$ses = New Session;
-		$req = New Request;
-		$like = new Like;
+		$ses     = New Session;
+		$req     = New Request;
+		$like    = new Like;
+		$comment = new Comment;
 
 		$info['error'] = "";
 
@@ -59,7 +61,16 @@ class Ajax
 					$info['liked'] = true;
 				}
 
-				$info['total_likes'] = $like->getLikes($post_data['post_id']);
+				$info['total'] = $like->getLikes($post_data['post_id']);
+			}else
+			if($post_data['data_type'] == 'delete-comment')
+			{
+
+				$row = $comment->first(['id'=>$post_data['comment_id'], 'user_id'=>user('id')]);
+				if($row)
+				{
+					$comment->delete($row->id);
+				}
 			}
 		}
 

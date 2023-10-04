@@ -358,3 +358,12 @@ function user($column = "")
 	$ses = new \Core\Session;
 	return $ses->user($column);
 }
+
+
+
+function dd($data)
+{
+	echo '<pre>';
+		die(var_dump($data));
+	echo '</pre>';
+}
