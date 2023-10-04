@@ -12,7 +12,7 @@
 		<input type="email"class="form-control my-3" value="<?=old_value('email')?>" name="email" placeHolder="Enter Your Email address">
 		<div><small class="text-danger"><?=$user->getError('email')?></small></div>
 		
-		<input type="password" class="form-control my-3" value="<?=old_value('password')?>" name="Enter Your Password" placeHolder="Password">
+		<input type="password" class="form-control my-3" value="<?=old_value('password')?>" name="password" placeHolder="Password">
 		<div><small class="text-danger"><?=$user->getError('password')?><small></div>
 		
 		<button class="my-3 btn btn-primary">Signup</button>
