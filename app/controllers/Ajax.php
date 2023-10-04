@@ -21,18 +21,21 @@ class Ajax
 		$req = New Request;
 		$like = new Like;
 
-		$info = [];
+		$info['error'] = "";
 
-		if(!Session::isLoggedIn())
-		{
-			echo"Please Log in to like this post"; die;
-
-		}
 
 		if($req->posted())
 		{
 			$post_data = $req->post();
 			$info['data_type'] = $post_data['data_type'];
+
+			if(!Session::isLoggedIn())
+			{
+				$info['error'] = "Error: You need to be Logged In !" ;
+				echo json_encode($info);
+				die;
+
+			}
 
 			$post_data['user_id'] = $ses->user('id');
 

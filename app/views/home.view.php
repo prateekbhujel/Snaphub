@@ -23,4 +23,4 @@
 	var root = '<?=ROOT?>';
 </script>
 
-<script src="<?=ROOT?>/assets/js/like.js"></script>
+<script src="<?=ROOT?>/assets/js/like.js?v1"></script>

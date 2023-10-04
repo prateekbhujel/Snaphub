@@ -46,19 +46,25 @@
 
 		handle_result: function(result)
 		{
+			// console.log(result);
 			let obj = JSON.parse(result);
 			if(obj.data_type = 'like')
 			{
-			// $heart_color = $like->userLiked(user('id'), $row->id) ? 'rgb(255, 48, 64)' : 'rgb(245, 245, 245)' ;
-			let svg = post.liked_element.querySelector('svg');
-			let color = obj.liked ? 'rgb(255, 48, 64)' : 'rgb(245, 245, 245)'; 
-			svg.setAttribute('fill', color);
+				if(obj.error != "")
+				{
+					alert(obj.error);
+					return 0;
+				}
 
-			if(obj.total_likes == 0)
-			{
-				obj.total_likes = "";
-			} 
-			post.liked_element.querySelector(".js-likes-count").innerHTML = obj.total_likes;
+				let svg = post.liked_element.querySelector('svg');
+				let color = obj.liked ? 'rgb(255, 48, 64)' : 'rgb(245, 245, 245)'; 
+				svg.setAttribute('fill', color);
+
+				if(obj.total_likes == 0)
+				{
+					obj.total_likes = "";
+				} 
+				post.liked_element.querySelector(".js-likes-count").innerHTML = obj.total_likes;
 
 			}
 		},
