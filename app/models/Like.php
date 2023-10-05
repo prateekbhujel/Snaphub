@@ -39,11 +39,11 @@ class Like
 	public function getLikes(int|string $post_id)
 	{
 		
-		$query = "SELECT COUNT(id) AS total_likes from likes WHERE post_id = :post_id && disabled = 0";
+		$query = "SELECT COUNT(id) AS total from likes WHERE post_id = :post_id && disabled = 0";
 
 		$row   = $this->query($query,['post_id'=>$post_id]);
 
-		return $row[0]->total_likes;
+		return $row[0]->total;
 	}
 
 

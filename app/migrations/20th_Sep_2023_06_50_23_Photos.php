@@ -19,6 +19,9 @@ class Photos extends Migration
         $this->addColumn('user_id int(11) DEFAULT 0 NOT NULL');
         $this->addColumn('title varchar(100) NULL');
         $this->addColumn('image varchar(1024) NULL');
+        $this->addColumn('image1 varchar(1024) NULL');
+        $this->addColumn('image2 varchar(1024) NULL');
+        $this->addColumn('image3 varchar(1024) NULL');
         $this->addColumn('date_created datetime NULL');
         $this->addColumn('date_updated datetime NULL');
         $this->addPrimaryKey('id');

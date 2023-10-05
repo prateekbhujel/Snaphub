@@ -60,11 +60,11 @@
 				let color = obj.liked ? 'rgb(255, 48, 64)' : 'rgb(245, 245, 245)'; 
 				svg.setAttribute('fill', color);
 
-				if(obj.total_likes == 0)
+				if(obj.total == 0)
 				{
-					obj.total_likes = "";
+					obj.total = "";
 				} 
-				post.liked_element.querySelector(".js-likes-count").innerHTML = obj.total_likes;
+				post.liked_element.querySelector(".js-likes-count").innerHTML = obj.total;
 
 			}
 		},
