@@ -42,45 +42,55 @@ class Upload
 					$post_data['date_created']	= date("Y-m-d H:i:s");
 					$post_data['user_id'] 		= $ses->user('id');
 					$post_data['image'] 			= "";
+					$post_data['image1'] 			= "";
+					$post_data['image2'] 			= "";
+					$post_data['image3'] 			= "";
 
 					$files = $req->files();
+					$image_added = false;
 
-					if(!empty($files['image']['name']))
+					$folder = 'uploads/';
+					if(!file_exists($folder))
 					{
-						$folder = 'uploads/';
-						if(!file_exists($folder))
+
+						mkdir($folder,0777,true);
+						file_put_contents($folder.'index.php', "");
+					}
+
+					foreach ($files as $key => $file){
+
+						if(!empty($files[$key]['name']))
 						{
 
-							mkdir($folder,0777,true);
-							file_put_contents($folder.'index.php', "");
-						}
-						$allowed = ['image/jpeg', 'image/png', 'image/webp'];
-						
-						if(in_array($files['image']['type'], $allowed))
-						{
-
-							$post_data['image'] = $folder . time() . $files['image']['name'];
+							$allowed = ['image/jpeg', 'image/png', 'image/webp'];
 							
-							move_uploaded_file($files['image']['tmp_name'], $post_data['image']);
+							if(in_array($files[$key]['type'], $allowed))
+							{	
+								$image_added = true;
+								$post_data[$key] = $folder . time() . $files[$key]['name'];
+								
+								move_uploaded_file($files[$key]['tmp_name'], $post_data[$key]);
 
-							$image = new \Model\Image; 
-							$image->resize($post_data['image'], 1000);
-							
-							$photo->insert($post_data);
-							redirect('photos');
+								$image = new \Model\Image; 
+								$image->resize($post_data[$key], 1000);
+								
 
-						}else{
+							}
 
-							$photo->errors['image'] = "Error: File Type Not Supported !"; 
 						}
+			}
+			// show($_FILES);die;
+			$photo->insert($post_data);
 
-				}else {
-
+				if(!$image_added) {
 					$photo->errors['image'] = "Error: An image is required !";
 				}
 			}
-
+			
 			$data['errors'] = $photo->errors;
+			
+			echo json_encode($data['errors']);
+			die;
 		}
 		
 			$data['photo']	= $photo;
@@ -191,6 +201,15 @@ class Upload
 
 			if(file_exists($row->image))
 				unlink($row->image);
+
+			if(file_exists($row->image1))
+				unlink($row->image1);
+			
+			if(file_exists($row->image2))
+				unlink($row->image2);
+
+			if(file_exists($row->image3))
+				unlink($row->image3);
 			
 			redirect('photos');
 

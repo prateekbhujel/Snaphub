@@ -7,7 +7,27 @@
 			<div class="col-sm-12 text-center bg-light">
 					<div class="card-header"><h4><?=esc($row->title)?></h4></div>
 					<div class="card-header"><a href="<?=ROOT?>/profile/<?=$row->user_id?>"><i>By: <?=esc($row->username)?></i></a></div>
-					<img src="<?=get_image($row->image)?>" class="img-thumbnail" style="sobject-fit: cover;widsth:250px;hseight:250px"  >
+
+		
+<?php if ($image = get_image($row->image)): ?>
+    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
+<?php endif; ?>
+
+<?php if ($image = get_image($row->image1)): ?>
+    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
+<?php endif; ?>
+
+<?php if ($image = get_image($row->image2)): ?>
+    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
+<?php endif; ?>
+
+<?php if ($image = get_image($row->image3)): ?>
+    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
+<?php endif; ?>
+
+	
+
+					
 				<br>
 
 				<?php if($ses->is_logged_in() && $ses->user('id') == $row->user_id):?>
