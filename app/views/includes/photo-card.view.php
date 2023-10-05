@@ -5,7 +5,7 @@
 	}
 </style>
 
-<div style="position:relative;" class="col-sm-4 col-md-3 col-lg-2 m-2 text-center bg-light">
+<div style="position:relative;" class="col-sm-6 col-md-4 col-lg-3 m-2 text-center bg-light">
 	<?php
 		
 		$heart_color = $like->userLiked(user('id'), $row->id) ? 'rgb(255, 48, 64)' : 'rgb(245, 245, 245)' ;
@@ -33,7 +33,33 @@
 	</div>
 
 	<a href="<?=ROOT?>/photo/<?=$row->id?>">
-		<img src="<?=get_image($image->getThumbnail($row->image,250,251))?>" class="img-thumbnail" style="sobject-fit: cover;widsth:250px;hseight:250px"  >
+
+		<?php if(imageCount($row) == 4) :?>
+			<div style="display:flex; flex-wrap: wrap;" class="img-thumbnail">
+				<img src="<?=get_image($image->getThumbnail($row->image,250,251))?>" class="" style="width: 50%; object-fit: cover;" >
+				<img src="<?=get_image($image->getThumbnail($row->image1,250,251))?>" class="" style="width: 50%; object-fit: cover;" >
+				<img src="<?=get_image($image->getThumbnail($row->image2,250,251))?>" class="" style="width: 50%; object-fit: cover;" >
+				<img src="<?=get_image($image->getThumbnail($row->image3,250,251))?>" class="" style="width: 50%; object-fit: cover;" >
+			</div>
+		
+		<?php elseif(imageCount($row) == 3) :?>
+			<div style="display:flex; flex-wrap: wrap;" class="img-thumbnail">
+				<img src="<?=get_image($image->getThumbnail($row->image,250,251))?>" class="" style="width: 100%; height: 151px; object-fit: cover;" >
+				<img src="<?=get_image($image->getThumbnail($row->image1,250,251))?>" class="" style="width: 50%; object-fit: cover;" >
+				<img src="<?=get_image($image->getThumbnail($row->image2,250,251))?>" class="" style="width: 50%; object-fit: cover;" >
+			</div>
+		
+		<?php elseif(imageCount($row) == 2) :?>
+			<div style="display:flex" class="img-thumbnail">
+				<img src="<?=get_image($image->getThumbnail($row->image,250,251))?>" class="" style="width: 50%; height: 350px; object-fit: cover; flex: 1"  >
+				<img src="<?=get_image($image->getThumbnail($row->image2,250,251))?>" class="" style="width: 50%; height: 350px; object-fit: cover; flex: 1"  >
+			</div>
+		
+		<?php else:?>
+			<img src="<?=get_image($image->getThumbnail($row->image,250,251))?>" class="img-thumbnail" style="width: 100%;"  >
+			
+		<?php endif;?>
+		
 		<div class="card-header"><?=esc($row->title)?></div>
 	</a>
 </div>

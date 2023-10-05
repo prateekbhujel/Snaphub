@@ -9,29 +9,36 @@
 				<div class="alert alert-danger text-center">Are you sure you want to delete this image?!</div>
 			<?php endif?>
 
-			<form method="post" enctype="multipart/form-data">
+			<form onsubmit= "submitForm(event)" method="post" enctype="multipart/form-data">
 				
-				<input class="form-control my-3" value="<?=old_value('title',$row->title ?? '')?>" name="title" placeHolder="Image title">
+				<input class="title form-control my-3" value="<?=old_value('title',$row->title ?? '')?>" name="title" placeHolder="Image title">
 				<div><small class="text-danger"><?=$photo->getError('title')?></small></div>
-
 				<label class="d-block">
 
 					<?php if($mode != 'delete'):?>
 						<div class="input-group mb-3">
-					  	<input onchange="display_image(this.files[0])" name="image" type="file" class="form-control" id="inputGroupFile02">
+					  	<input multiple onchange="display_image(this.files)" name="image" type="file" class="images form-control" id="inputGroupFile02">
 					  	<label class="input-group-text" for="inputGroupFile02">Select Image</label>
 						</div>
 						<div><small class="text-danger"><?=$photo->getError('image')?></small></div>
 					<?php endif?>
 
-					<div>
-						<img src="<?=get_image($row->image ?? '')?>" class="js-image-preview img-thumbnail mx-auto d-block" style="cursor: pointer;">
+					<div class="js-image-preview-holder text-center" style="cursor: pointer;">
+						<img src="<?=get_image($row->image ?? '')?>" class="img-thumbnail m-1" style="max-width: 250px;">
+					</div>
+
+					<div class="text-center my-2">	
+						<span class="text-danger " style="font-size:14px;"> ** Maximum Number of Images : 4 Images ** </span>
 					</div>
 				</label>
 
+				<div class="progress my-2 d-none">
+					<div class="progress-bar bg-success" style="width: 50%;"> Saving 50% </div>
+				</div>
+				
 				<?php if($mode == 'delete'):?>
 					<button class="btn btn-danger my-3">Delete</button>
-				<?php else:?>
+				<?php else:?>	
 					<button class="btn btn-primary my-3">Save</button>
 				<?php endif?>
 			</form>
@@ -43,15 +50,91 @@
 	
 	<script type="text/javascript">
 		
-		function display_image(file)
+		function display_image(files)
 		{
-			let allowed = ['image/jpeg','image/png','image/webp'];
-			if(!allowed.includes(file.type))
+			let holder = document.querySelector(".js-image-preview-holder");
+			holder.innerHTML = "";
+
+			for (var i = 0 ; i < files.length; i++) {
+
+				let allowed = ['image/jpeg','image/png','image/webp'];
+				if(!allowed.includes(files[i].type))
+				{
+					alert("File: "+ files[i].name +" not supported ! The only file types supported are: " + allowed.toString().replaceAll("image/",""));
+					continue;
+				}
+
+				let img = document.createElement('img');
+				img.src = URL.createObjectURL(files[i]);
+				img.setAttribute('class', "img-thumbnail m-1");
+				img.setAttribute('style', "max-width: 47%;");
+
+				holder.appendChild(img);
+			}
+		}
+
+		var uploading = false;
+
+		function submitForm(e)
+		{
+
+			e.preventDefault();
+			if(uploading)
 			{
-				alert("The only files supported are: " + allowed.toString().replaceAll("image/",""));
+				alert("Please Wait for the upload to complete!");
 				return;
 			}
-			document.querySelector(".js-image-preview").src = URL.createObjectURL(file);
+
+			uploading = true;
+
+			let myform = new FormData();
+
+			document.querySelector(".progress-bar").innerHTML = "0%";
+			document.querySelector(".progress-bar").style.width = "0%";
+			document.querySelector(".progress").classList.remove('d-none');
+
+			myform.append('title', document.querySelector("form .title").value);
+			let files = document.querySelector("form .images").files;
+			let allowed = ['image/jpeg','image/png','image/webp'];
+			
+			let z = 0;
+			for(var i = 0; i < files.length; i++) {
+				if(z > 4 || !allowed.includes(files[i].type))
+				{
+					continue;
+				}
+				let key = z > 0 ? z  : '';
+				z++;
+				myform.append('image'+key, files[i]);
+			}
+
+			let xhr = new XMLHttpRequest();
+
+			xhr.addEventListener('readystatechange', function(){
+
+				if(xhr.readyState == 4)
+				{
+					uploading = false;
+					if(xhr.responseText == '[]'){
+						alert("Upload complete!");
+						window.location.reload();
+					}else {
+						console.log(xhr.responseText);
+					}
+				}
+			});
+
+			xhr.upload.addEventListener('progress', function(e){
+
+				let percent = Math.round((e.loaded / e.total)) * 100;
+				document.querySelector(".progress-bar").style.width = percent + '%';
+				document.querySelector(".progress-bar").innerHTML = 'Uploading . . . ' + percent + '%';
+				
+			});
+			
+			xhr.open('post', '', true);
+			xhr.send(myform);
+
 		}
 
 	</script>

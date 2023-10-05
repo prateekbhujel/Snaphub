@@ -72,6 +72,11 @@ function get_image(mixed $file = '',string $type = 'post'):string
 		return ROOT."/assets/images/no_image.jpg";
 	}
 
+	if($type=="ss")
+	{
+		return '';
+	}
+
 }
 
 
@@ -366,4 +371,22 @@ function dd($data)
 	echo '<pre>';
 		die(var_dump($data));
 	echo '</pre>';
+}
+
+
+function imageCount($row)
+{
+
+	if(file_exists($row->image3))
+		return 4;
+	
+	if(file_exists($row->image2))
+		return 3;
+	
+	if(file_exists($row->image1))
+		return 2;
+
+
+	return 1;
+
 }

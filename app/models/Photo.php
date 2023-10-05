@@ -23,6 +23,9 @@ class Photo
 		'image' ,
 		'date_created' ,
 		'date_update' ,
+		'image1' ,
+		'image2' ,
+		'image3' ,
 	];
 
 	/*****************************
