@@ -52,7 +52,7 @@
 		<?php elseif(imageCount($row) == 2) :?>
 			<div style="display:flex" class="img-thumbnail">
 				<img src="<?=get_image($image->getThumbnail($row->image,250,251))?>" class="" style="width: 50%; height: 350px; object-fit: cover; flex: 1"  >
-				<img src="<?=get_image($image->getThumbnail($row->image2,250,251))?>" class="" style="width: 50%; height: 350px; object-fit: cover; flex: 1"  >
+				<img src="<?=get_image($image->getThumbnail($row->image1,250,251))?>" class="" style="width: 50%; height: 350px; object-fit: cover; flex: 1"  >
 			</div>
 		
 		<?php else:?>
