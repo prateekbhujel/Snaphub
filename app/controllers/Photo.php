@@ -71,6 +71,11 @@ class Photo
 		$data['image'] = new Image;
 		$data['id'] = $id;
 
+		$data['image1'] = $row->image;
+		$data['image2'] = $row->image1;
+		$data['image3'] = $row->image2;
+		$data['image4'] = $row->image3;
+
 		$this->view('photo',$data);
 	}
 

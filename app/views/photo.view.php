@@ -8,26 +8,44 @@
 					<div class="card-header"><h4><?=esc($row->title)?></h4></div>
 					<div class="card-header"><a href="<?=ROOT?>/profile/<?=$row->user_id?>"><i>By: <?=esc($row->username)?></i></a></div>
 
-		
-<?php if ($image = get_image($row->image)): ?>
-    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
-<?php endif; ?>
+<div class="container">
+    <div class="row">
+        <?php if ($image1 && $image2 && $image3 && $image4): ?>
+            <div class="d-flex flex-wrap">
+                <?php foreach ([$image1, $image2, $image3, $image4] as $image): ?>
+                    <div class="col-md-6 mb-2">
+                        <img src="<?= get_image($image) ?>" class="img-fluid img-thumbnail" style="object-fit: cover;">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php elseif ($image1 && $image2 && $image3): ?>
+            <div class="d-flex flex-wrap">
+                <?php foreach ([$image1, $image2, $image3] as $image): ?>
+                    <div class="col-md-4 mb-2">
+                        <img src="<?= get_image($image) ?>" class="img-fluid img-thumbnail" style="object-fit: cover;">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php elseif ($image1 && $image2): ?>
+            <div class="d-flex">
+                <?php foreach ([$image1, $image2] as $image): ?>
+                    <div class="col-md-6 mb-2">
+                        <img src="<?= get_image($image) ?>" class="img-fluid img-thumbnail" style="object-fit: cover;">
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php elseif ($image1): ?>
+            <div class="col-md-12 mb-2">
+                <img src="<?= get_image($image1) ?>" class="img-fluid img-thumbnail" style="object-fit: cover;">
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
 
-<?php if ($image = get_image($row->image1)): ?>
-    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
-<?php endif; ?>
 
-<?php if ($image = get_image($row->image2)): ?>
-    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
-<?php endif; ?>
 
-<?php if ($image = get_image($row->image3)): ?>
-    <img src="<?= $image ?>" class="img-thumbnail" style="object-fit: cover; width: 480px; height: 280px;">
-<?php endif; ?>
 
-	
-
-					
+					<br>
 				<br>
 
 				<?php if($ses->is_logged_in() && $ses->user('id') == $row->user_id):?>
@@ -41,7 +59,7 @@
 				<?php endif?>
 			</div>
 
-			<div class="border p-2 mx-auto row bg-light" style="max-width:1000px">
+			<div class="border p-2 mx-auto row bg-light my-4" style="max-width:1000px"><br>
 				<h5>Comments</h5>
 
 				<?php if($ses->is_logged_in()):?>
